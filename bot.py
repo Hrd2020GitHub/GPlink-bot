@@ -1,5 +1,6 @@
 from os import environ
 import aiohttp
+import asyncio
 from pyrogram import Client, filters
 
 API_ID = environ.get('API_ID')

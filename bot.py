@@ -27,13 +27,9 @@ async def start(bot, message):
 @bot.on_message(filters.regex(r'https?://[^\s]+') & filters.private)
 async def link_handler(bot, message):
     link = message.matches[0].group(0)
-    try:
-        short_link = await get_shortlink(link)
-        await message.reply(f'({short_link})', quote=True)
-    except Exception as e:
-        await message.reply(f'Error: {e}', quote=True)
-
-
+    short_link = await get_shortlink(link)
+    await message.reply(f'({short_link})', quote=True)
+    
 async def get_shortlink(link):
     url = 'https://gplinks.in/api'
     params = {'api': 'bd724612452c5ac148c02e405196f458887c1747', 'url': link}
@@ -42,6 +38,5 @@ async def get_shortlink(link):
         async with session.get(url, params=params, raise_for_status=True) as response:
             data = await response.json()
             return data["shortenedUrl"]
-asyncio.run(link_handler())
 
 bot.run()

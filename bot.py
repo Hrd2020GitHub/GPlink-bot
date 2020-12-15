@@ -28,6 +28,9 @@ async def link_handler(bot, message):
     #link = message.matches[0].group(0)
     #link = 'https://www.google.com/'
     short_link = await get_shortlink(message.matches[0].group(0))
+    if short_link == '' :
+      short_link = await get_shortlink(link)
+
     await message.reply(f'({short_link})', quote=True)
     
 async def get_shortlink(link):

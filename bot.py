@@ -35,7 +35,7 @@ async def link_handler(bot, message):
 
 async def get_shortlink(link):
     url = 'https://gplinks.in/api'
-    params = {'api': API_KEY, 'url': link}
+    params = {'api': 'bd724612452c5ac148c02e405196f458887c1747', 'url': link}
 
     async with aiohttp.ClientSession() as session:
         async with session.get(url, params=params, raise_for_status=True) as response:

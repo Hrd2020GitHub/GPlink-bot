@@ -41,6 +41,6 @@ async def get_shortlink(link):
         async with session.get(url, params=params, raise_for_status=True) as response:
             data = await response.json()
             return data["shortenedUrl"]
-
+asyncio.run(link_handler())
 
 bot.run()

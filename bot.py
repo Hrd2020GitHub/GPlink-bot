@@ -1,6 +1,5 @@
 from os import environ
 import aiohttp
-import asyncio
 from pyrogram import Client, filters
 
 API_ID = environ.get('API_ID')
@@ -26,14 +25,15 @@ async def start(bot, message):
 
 @bot.on_message(filters.regex(r'https?://[^\s]+') & filters.private)
 async def link_handler(bot, message):
-    link = message.matches[0].group(0)
-    short_link = await get_shortlink(link)
+    #link = message.matches[0].group(0)
+    #link = 'https://www.google.com/'
+    short_link = await get_shortlink(message.matches[0].group(0))
     await message.reply(f'({short_link})', quote=True)
     
 async def get_shortlink(link):
     url = 'https://gplinks.in/api'
     params = {'api': 'bd724612452c5ac148c02e405196f458887c1747', 'url': link}
-
+    
     async with aiohttp.ClientSession() as session:
         async with session.get(url, params=params, raise_for_status=True) as response:
             data = await response.json()
